@@ -1,0 +1,12 @@
+<div class="mb-12">
+    <h1>Meus baralhos</h1>
+</div>
+
+<div 
+    class="flex justify-center items-center h-80" 
+    *ngIf="requestLoaderService.loading$ | async;"
+>
+    <mat-spinner />
+</div>
+
+<deck />
