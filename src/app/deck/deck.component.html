@@ -1,0 +1,47 @@
+<section class="grid grid-cols-6 gap-8">
+    <div 
+        *ngFor="
+            let deck of listDeck; 
+            let deckIndex = index
+        " 
+        class="relative mb-80"
+        [matTooltip]="getDetails(deck)"
+        (dblclick)="startEdit(deckIndex)"
+    >
+        <div 
+            *ngFor="
+                let card of deck.items?.slice(0, 3); 
+                let cardIndex = index
+            "
+        >
+            <div class="flex justify-between align-middle mb-1">
+                <div *ngIf="editingDeckIndex === deckIndex">
+                    <input 
+                        type="text" 
+                        [(ngModel)]="deck.name" 
+                        (blur)="stopEdit()"
+                    />
+                </div>
+                <h4 *ngIf="editingDeckIndex !== deckIndex">
+                    {{deck.name}}
+                </h4>
+                <button
+                    (click)="deleteDeck(deckIndex, deck)"
+                    mat-icon-button 
+                    class="w-fit"
+                >
+                    <mat-icon>
+                        delete
+                    </mat-icon>
+                </button>
+            </div>
+            <div 
+                [class]="'absolute mt-' + cardIndex"
+            >
+                <deck-card
+                    [data]="card" 
+                />
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,36 @@
+<div class="mb-10">
+  <h1>Novo baralho</h1>
+</div>
+
+<form 
+    [formGroup]="form" 
+    (ngSubmit)="submitDeck()"
+    class="grid grid-cols-2 gap-2"
+>
+  <mat-form-field appearance="fill">
+    <mat-label>Nome:</mat-label>
+    <input matInput type="text" formControlName="name" />
+  </mat-form-field>
+
+  <button 
+    class="w-fit" 
+    mat-raised-button 
+    type="submit"
+    style="height: 72%;"
+  >
+    Enviar Baralho
+  </button>
+</form>
+
+<div class="mb-10">
+  <small 
+    mat-error 
+    *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched"
+    class="error"
+  >
+    O nome é obrigatório.
+  </small>
+  <small class="error">{{errorMensage}}</small>
+</div>
+
+<listCard (cardClicked)="fillFormWithCard($event)" />
