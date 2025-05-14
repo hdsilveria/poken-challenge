@@ -1,0 +1,17 @@
+<div 
+    class="flex justify-center items-center h-80" 
+    *ngIf="requestLoaderService.loading$ | async;"
+>
+    <mat-spinner />
+</div>
+
+<div class="grid grid-cols-10 gap-2">
+    <ng-container *ngFor="let card of listCard">
+        <CardComponent 
+            [data]="card"
+            [class.selected]="card.selected"
+            (click)="onCardClick(card)"
+        />
+    </ng-container>
+</div>
+
